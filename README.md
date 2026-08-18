@@ -48,3 +48,15 @@ El tablero se divide estratégicamente en dos páginas de alta dirección:
 ### 2. Análisis Decisiones Operativas (Costo-Volumen-Utilidad)
 *   **Punto de Equilibrio Dinámico ($Q_e$):** Fijado de forma exacta en **2.000 unidades físicas** o **$2,4 millones monetarios** para la cobertura total de la estructura de costos fijos.
 *   **Evaluación del Riesgo de Explotación:** Visualización de la curva de Ingresos Reales vs. Costos Totales ($C_V + C_F$), acompañada por segmentadores trimestrales interactivos para analizar la volatilidad del **Margen de Seguridad %**.
+
+*   ## 🔐 Seguridad y Despliegue Local (Nota para Evaluadores)
+
+Para proteger las credenciales de administración del clúster cloud en **Neon.tech**, la cadena de conexión se gestiona de forma segura mediante variables de entorno cifradas utilizando el gestor nativo de Google Colab (`google.colab.userdata`).
+
+Si desea replicar el pipeline de datos localmente o en su propio entorno, debe seguir estos pasos:
+
+1. **Crear las credenciales:** Registre una base de datos gratuita en [Neon.tech](https://neon.tech) (PostgreSQL).
+2. **Configurar el Secreto:** En la barra lateral izquierda de Google Colab, acceda al ícono de la llave (**Secrets**) y añada un registro con:
+   * **Nombre:** `NEON_DB_URL`
+   * **Valor:** Su cadena de conexión larga agrupada (*Pooled Connection String*), la cual incluye el usuario y contraseña de su servidor.
+3. **Otorgar Permisos:** Asegúrese de activar el interruptor de **"Acceso desde el notebook"** (botón en color azul) antes de ejecutar la celda. El script leerá el entorno dinámicamente mediante `userdata.get('NEON_DB_URL')` sin exponer datos críticos en el código.
